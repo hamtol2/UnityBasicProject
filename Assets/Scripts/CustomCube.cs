@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 // Home / End.
@@ -14,9 +15,13 @@ public class CustomCube : MonoBehaviour
     [SerializeField]
     private Transform refTransform;
 
-    // X축의 이동 속도.
+    // 이동 속도.
     [SerializeField]
     private float moveSpeed = 0.01f;
+
+    // 회전 속도(단위 초).
+    [SerializeField]
+    private float rotationSpeed = 360f;
 
     // Start is called before the first frame update
     // 이벤트 함수(메소드) -> 엔진이 알아서 실행해준다.
@@ -55,10 +60,26 @@ public class CustomCube : MonoBehaviour
         // 등속도 운동.
         // s = 속도(빠르기);
         // 프레임 마다 조금씩 이동.
-        refTransform.Translate(
-            moveSpeed * horizontal * Time.deltaTime,
-            moveSpeed * vertical * Time.deltaTime, 
-            0f
-        );
+        // Ctrl + K / Ctrl + C
+        //refTransform.Translate(
+        //    moveSpeed * horizontal * Time.deltaTime,
+        //    moveSpeed * vertical * Time.deltaTime, 
+        //    0f
+        //);
+
+        // 이동 Z축->물체 기준 앞뒤 이동.
+        //refTransform.position = refTransform.position
+        //    + new Vector3(0f, 0f, vertical * moveSpeed * Time.deltaTime);
+        // 이동은 = 위치 + 벡터.
+        refTransform.position = refTransform.position
+            + refTransform.forward * vertical * moveSpeed * Time.deltaTime;
+
+        // 회전 Y축.
+        refTransform.Rotate(
+            new Vector3(
+                0f,
+                horizontal * rotationSpeed * Time.deltaTime,
+                0f)
+            );
     }
 }
