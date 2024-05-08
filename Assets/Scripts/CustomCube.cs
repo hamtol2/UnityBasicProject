@@ -74,12 +74,16 @@ public class CustomCube : MonoBehaviour
         refTransform.position = refTransform.position
             + refTransform.forward * vertical * moveSpeed * Time.deltaTime;
 
+        // 회전.
+        refTransform.rotation = refTransform.rotation
+            * Quaternion.Euler(0f, horizontal * rotationSpeed * Time.deltaTime, 0f);
+
         // 회전 Y축.
-        refTransform.Rotate(
-            new Vector3(
-                0f,
-                horizontal * rotationSpeed * Time.deltaTime,
-                0f)
-            );
+        //refTransform.Rotate(
+        //    new Vector3(
+        //        0f,
+        //        horizontal * rotationSpeed * Time.deltaTime,
+        //        0f)
+        //    );
     }
 }
