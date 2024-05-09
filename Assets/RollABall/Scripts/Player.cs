@@ -1,38 +1,38 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace RollABall
 {
     public class Player : MonoBehaviour
     {
-        // ÀÌµ¿¼Óµµ º¯¼ö.
+        // ì´ë™ì†ë„ ë³€ìˆ˜.
         [SerializeField]
         private float moveSpeed = 5f;
 
-        // Æ®·£½ºÆû ÄÄÆ÷³ÍÆ® ÂüÁ¶ º¯¼ö.
+        // íŠ¸ëœìŠ¤í¼ ì»´í¬ë„ŒíŠ¸ ì°¸ì¡° ë³€ìˆ˜.
         [SerializeField]
         private Transform refTransform;
 
-        // Start¿Í ºñ½ÁÇÑ ½ÃÀÛÇÒ ¶§ ÇÑ¹ø È£ÃâµÇ´Â ¸Ş¼Òµå.
+        // Startì™€ ë¹„ìŠ·í•œ ì‹œì‘í•  ë•Œ í•œë²ˆ í˜¸ì¶œë˜ëŠ” ë©”ì†Œë“œ.
         private void Awake()
         {
-            // Æ®·£½ºÆû ÂüÁ¶ º¯¼ö ÃÊ±âÈ­(¼³Á¤).
+            // íŠ¸ëœìŠ¤í¼ ì°¸ì¡° ë³€ìˆ˜ ì´ˆê¸°í™”(ì„¤ì •).
             refTransform = transform;
         }
 
         void Update()
         {
-            // ÀÔ·Â ¹Ş±â.
+            // ì…ë ¥ ë°›ê¸°.
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
-            // ÀÌµ¿ Àû¿ë.
-            // ÀÔ·Â °ª / ÀÌµ¿ ¼Óµµ / ÇÁ·¹ÀÓ ½Ã°£.
-            // ÀÌµ¿ = À§Ä¡ + º¤ÅÍ.
+            // ì´ë™ ì ìš©.
+            // ì…ë ¥ ê°’ / ì´ë™ ì†ë„ / í”„ë ˆì„ ì‹œê°„.
+            // ì´ë™ = ìœ„ì¹˜ + ë²¡í„°.
 
-            // ÀÌµ¿ ¹æÇâ ¸¸µé±â.
+            // ì´ë™ ë°©í–¥ ë§Œë“¤ê¸°.
             Vector3 direction = new Vector3(horizontal, 0f, vertical);
             
-            // ´ÜÀ§ º¤ÅÍ ¸¸µé±â. (Á¤±ÔÈ­).
+            // ë‹¨ìœ„ ë²¡í„° ë§Œë“¤ê¸°. (ì •ê·œí™”).
             direction.Normalize();
             refTransform.position = refTransform.position
                 + direction * moveSpeed * Time.deltaTime;
